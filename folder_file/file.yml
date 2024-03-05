@@ -1,0 +1,30 @@
+---
+- hosts: local
+  vars:
+    address: /root
+  tasks:
+    - name: create a folder
+      file:
+        path: "{{ address }}/Subbu"
+        state: directory
+        mode: 777
+
+    - name: create file inside above folder
+      file:
+        path: "{{ address }}/Subbu/file-1"
+        state: touch
+
+    - name: entering data inside file
+      copy:
+        dest: "{{ address }}/Subbu/file-1"
+        content: " I entered this data to file via copy module in yaml file with content argument  by specifying destination argument"
+
+
+    - name: changing user's and group's for the folder
+      file:
+        path: "{{address}}/Subbu"
+        recurse: yes
+        state: directory
+        owner: subbu
+        group: subbu
+
