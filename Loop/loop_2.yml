@@ -1,0 +1,19 @@
+---
+- hosts: local
+
+  vars:
+    users:
+      - user_4
+      - user_5
+      - user_6
+
+
+  tasks:
+    - name: adding users using variables
+      user:
+        name: "{{ item }}"
+        state: present
+
+      with_items: "{{ users }}"
+        
+

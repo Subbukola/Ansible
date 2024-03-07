@@ -1,0 +1,42 @@
+---
+- hosts: local
+
+  tasks:
+    - name: lets start working with block
+
+      block:
+        - name: welcome to block
+          debug: msg="entered into block"
+
+        - name: creating folder
+          file:
+            path: "/root/my_block"
+            mode: 766
+            state: directory
+
+        - name: creating file
+          file:
+            path: "/root/my_bloc/file"
+            state: touch
+
+        - name: block completed
+          debug: msg="block execution completed successfully"
+
+      rescue:
+        - name: rescue
+          debug: msg="enterd into rescue"
+
+        - name: create file
+          file:
+            path: "/root/my_block/file"
+            state: touch
+
+        - name: rescue completed
+          debug: msg="recue successfully completed"
+
+      always:
+        - name: always
+          debug: msg="always executes this block"
+
+
+

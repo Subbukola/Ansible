@@ -1,0 +1,13 @@
+---
+- hosts: local
+  tasks:
+
+    - name: adding users in Loop
+      user:
+        name: "{{ item }}"
+        state: present
+
+      with_items:
+        - user_1
+        - user_2
+        - user_3

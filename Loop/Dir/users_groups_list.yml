@@ -1,0 +1,18 @@
+---
+- hosts: local
+
+  tasks:
+
+    - name: getting list of users
+      command: cat  /etc/passwd
+      register: list_of_users
+
+    - debug:
+         msg: "List of users are {{ list_of_users.stdout }}"
+
+    - name: getting list of groups
+      command: cat /etc/group
+      register: list_of_groups
+
+    - debug:
+         msg: " list of groups are {{ list_of_groups }}"

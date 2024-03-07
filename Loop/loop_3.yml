@@ -1,0 +1,16 @@
+---
+- hosts: local
+  vars:
+    directories:
+      - fol_1
+      - fol_2
+
+  tasks:
+
+    - name: create directories
+      file:
+        path: "/root/{{ item}}"
+        mode: 766
+        state: directory
+
+      with_items: " {{ directories }} "

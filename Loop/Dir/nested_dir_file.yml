@@ -1,0 +1,13 @@
+---
+- hosts: local
+
+  tasks:
+    - name: creating files inside directory using nested loop
+      file:
+        path: "/root/{{ item[0] }}/{{ item[1] }}"
+        state: touch
+        mode: 766
+
+      with_nested:
+        - ['fol_1', "fol_2"] # you must have  folder inside root and mention that folder name
+        - ['file-1' , 'file-2' , 'file-3']
