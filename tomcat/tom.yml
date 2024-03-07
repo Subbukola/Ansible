@@ -1,0 +1,27 @@
+---
+- hosts: dev
+  tasks:
+    - name: install java dependency for tomcat
+      command: yum install java-1.8.0-openjdk -y
+
+    - name:  get tomcat url
+      get_url:
+        url: https://downloads.apache.org/tomcat/tomcat-9/v9.0.85/bin/apache-tomcat-9.0.85.tar.gz
+        dest: /root
+
+    - name: unarchive the tomcat file
+      command: tar -zxvf apache-tomcat-9.0.85.tar.gz
+
+    - name: copy context.xml 
+      copy:
+        src: /root/context.xml
+        dest: /root/apache-tomcat-9.0.85/webapps/manager/META-INF/context.xml
+
+    - name: copy tomcat-users.xml
+      copy:
+        src: /root/tomcat-users.xml
+        dest: /root/apache-tomcat-9.0.85/conf/tomcat-users.xml
+
+    - name: start tomcat
+      shell: nohup /root/apache-tomcat-9.0.85/bin/startup.sh
+
